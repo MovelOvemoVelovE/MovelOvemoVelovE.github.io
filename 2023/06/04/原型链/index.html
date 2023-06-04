@@ -1,0 +1,218 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>原型链 | 码农必须冷静</title><meta name="author" content="kaka"><meta name="copyright" content="kaka"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="前言js是基于原型的，ES6的class也不足以让js成为基于类的语言，只是语法糖。     谈到继承，js只有一种结构:对象。 每一个实例对象都有一个私有属性(proto)指向构造函数的prototype原型对象。 该原型对象也有自己的原型对象(proto),层层往上直到一个对象的原型对象为null(null没有原型)。 基于原型链的继承继承属性js对象是动态属性”包”, 对象有一个指向原型对象">
+<meta property="og:type" content="article">
+<meta property="og:title" content="原型链">
+<meta property="og:url" content="http://movelovemovelove.github.io/2023/06/04/%E5%8E%9F%E5%9E%8B%E9%93%BE/index.html">
+<meta property="og:site_name" content="码农必须冷静">
+<meta property="og:description" content="前言js是基于原型的，ES6的class也不足以让js成为基于类的语言，只是语法糖。     谈到继承，js只有一种结构:对象。 每一个实例对象都有一个私有属性(proto)指向构造函数的prototype原型对象。 该原型对象也有自己的原型对象(proto),层层往上直到一个对象的原型对象为null(null没有原型)。 基于原型链的继承继承属性js对象是动态属性”包”, 对象有一个指向原型对象">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://movelovemovelove.github.io/img/portial.jpg">
+<meta property="article:published_time" content="2023-06-04T03:42:59.000Z">
+<meta property="article:modified_time" content="2023-06-04T03:43:44.678Z">
+<meta property="article:author" content="kaka">
+<meta property="article:tag" content="js">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://movelovemovelove.github.io/img/portial.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://movelovemovelove.github.io/2023/06/04/%E5%8E%9F%E5%9E%8B%E9%93%BE/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '原型链',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-06-04 11:43:44'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = (url,id = false) => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      if (id) link.id = id
+      link.onerror = reject
+      link.onload = link.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        link.onload = link.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/portial.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">6</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">4</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><span id="blog-info"><a href="/" title="码农必须冷静"><span class="site-name">码农必须冷静</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">原型链</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-06-04T03:42:59.000Z" title="发表于 2023-06-04 11:42:59">2023-06-04</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-06-04T03:43:44.678Z" title="更新于 2023-06-04 11:43:44">2023-06-04</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="原型链"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div><article class="post-content" id="article-container"><h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>js是基于原型的，ES6的class也不足以让js成为基于类的语言，只是语法糖。    </p>
+<p>谈到继承，js只有一种结构:对象。 每一个实例对象都有一个私有属性(<em>proto</em>)指向构造函数的prototype原型对象。 该原型对象也有自己的原型对象(<em>proto</em>),层层往上直到一个对象的原型对象为null(null没有原型)。</p>
+<h2 id="基于原型链的继承"><a href="#基于原型链的继承" class="headerlink" title="基于原型链的继承"></a>基于原型链的继承</h2><h4 id="继承属性"><a href="#继承属性" class="headerlink" title="继承属性"></a>继承属性</h4><p>js对象是动态属性”包”, 对象有一个指向原型对象的链。  访问属性，不仅搜寻该对象还会搜寻原型，原型的原型， 依次层层向上搜索。直到匹配或者原型的末尾</p>
+<blockquote>
+<p>Obj.[[prototype]]指向Obj的原型，ES6开始,[[prototype]]可通过object.getPrototypeof()和object.setPrototypeOf()访问。等同于_proto_,但与构造函数的<code>prototype</code>不能混淆。<br>被构造函数创建的obj的[[prototype]]指向的是func的prototype属性。<br>Object.prototype指向的原型对象。</p>
+</blockquote>
+<p><strong>演示:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">let f = function()&#123;</span><br><span class="line">    this.a = 1</span><br><span class="line">    this.b = 2</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">let o = new f()</span><br><span class="line"></span><br><span class="line">f.prototype.b = 3</span><br><span class="line">f.prototype.c = 4</span><br><span class="line"></span><br><span class="line">// o.[[prototype]]有属性a和b。</span><br><span class="line">// o.[[prototype]].[[prototype]]是object.prototype</span><br><span class="line"></span><br><span class="line">console.log(o.a)  // 1</span><br><span class="line">console.log(o.b)  // 2    自有属性是2，所以就是2  不会访问原型链  也叫做属性遮蔽(property shadowing)</span><br><span class="line">console.log(o.c)  // 4</span><br><span class="line">console.log(o.d)  // undefined</span><br></pre></td></tr></table></figure>
+
+<h4 id="继承方法"><a href="#继承方法" class="headerlink" title="继承方法"></a>继承方法</h4><p>js任何函数都可以添加到对象上作为key，函数属性与其他属性继承没有差别，包括property shadowing</p>
+<p>函数被调用，this指向当前继承对象，而不是函数所在原型对象</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">let o = &#123;</span><br><span class="line">    a: 2,</span><br><span class="line">    m: function()&#123;</span><br><span class="line">        return this.a + 1</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">console.log(o.m()) // 3</span><br><span class="line"></span><br><span class="line">let p = Object.create(o)</span><br><span class="line"></span><br><span class="line">p.a = 4</span><br><span class="line"></span><br><span class="line">console.log(p.m()) // 5</span><br></pre></td></tr></table></figure>
+
+<h2 id="js使用原型"><a href="#js使用原型" class="headerlink" title="js使用原型"></a>js使用原型</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">function doS()&#123;&#125;</span><br><span class="line">let fn = function()&#123;&#125;</span><br><span class="line"></span><br><span class="line">console.log(doS.prototype)</span><br><span class="line">console.log(fn.prototype)</span><br></pre></td></tr></table></figure>
+
+<p>可以看到两种方式打印出来都是:(与声明方式无关)</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    constructor: ƒ doSomething(),</span><br><span class="line">    [[prototype]]: &#123;&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>给原型上增加属性:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">doS.prototype.foo = &#x27;bar&#x27;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    foo: &#x27;bar&#x27;,</span><br><span class="line">    constructor: ƒ doSomething(),</span><br><span class="line">    [[prototype]]: &#123;&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>使用new实例化对象会得到如下:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">let doSInstance = new doS()</span><br><span class="line">doSInstance.prop = &#x27;some value&#x27;</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">    prop: &quot;some value&quot;,</span><br><span class="line">    __proto__: &#123;</span><br><span class="line">        foo: &quot;bar&quot;,</span><br><span class="line">        constructor: ƒ doSomething(),</span><br><span class="line">        __proto__: &#123;</span><br><span class="line">            constructor: ƒ Object(),</span><br><span class="line">            hasOwnProperty: ƒ hasOwnProperty(),</span><br><span class="line">            isPrototypeOf: ƒ isPrototypeOf(),</span><br><span class="line">            propertyIsEnumerable: ƒ propertyIsEnumerable(),</span><br><span class="line">            toLocaleString: ƒ toLocaleString(),</span><br><span class="line">            toString: ƒ toString(),</span><br><span class="line">            valueOf: ƒ valueOf()</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>以上实例化对象的_proto_是构造函数的prototype. 访问实例化对象浏览器访问顺序如下:</p>
+<ol>
+<li>实例化对象不包含属性，在实例化对象的<code>_proto_</code>查找。有则使用该属性</li>
+<li>实例化对象的<code>_proto_</code>不存在，在<code>_proto_._proto_</code>查找.而任何函数的<code>_proto_</code>都是<code>window.Object.prototype</code>,同构造函数<code>Fn.prototype._proto_(同Object.prototype)</code>查找。有则使用该属性</li>
+<li>实例化对象<code>._proto_._proto_</code>不存在，会在<code>._proto_._proto_._ proto_</code> 查找，这个<code>_proto_</code>其实并不存在，是<code>null</code>。</li>
+<li>浏览器断言该属性不存在</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">function doSomething()&#123;&#125;</span><br><span class="line">let doSInstance = new doSomething()</span><br><span class="line">doSomething.prototype.foo = &#x27;foo&#x27;</span><br><span class="line">doSInstance.props = &quot;some props&quot;</span><br><span class="line"></span><br><span class="line">// 打印结果如下:</span><br><span class="line">doSomething.foo: undefined</span><br><span class="line">doSomething.props: undefined</span><br><span class="line">doSInstance.foo: foo</span><br><span class="line">doSInstance.props: some props</span><br><span class="line">doSomething.prototype.props: undefined</span><br><span class="line">doSomething.prototype.foo: foo</span><br></pre></td></tr></table></figure>
+
+<h2 id="使用不同方法创建和生成原型链"><a href="#使用不同方法创建和生成原型链" class="headerlink" title="使用不同方法创建和生成原型链"></a>使用不同方法创建和生成原型链</h2><h4 id="使用语法结构创建的对象"><a href="#使用语法结构创建的对象" class="headerlink" title="使用语法结构创建的对象"></a>使用语法结构创建的对象</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">let obj = &#123; </span><br><span class="line">    a: &#x27;1&#x27;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">let arr = [&#x27;a&#x27;, &#x27;b&#x27;, &#x27;vc&#x27;]</span><br><span class="line"></span><br><span class="line">function func()&#123;</span><br><span class="line">    return 2</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li><strong>obj</strong>, o继承window.Object.prototype所有属性 原型链为:<strong><code>o --&gt; Object.prototype --&gt; null</code></strong></li>
+<li><strong>arr</strong>, arr继承Array.prototype(forEach等方法) 原型链为: <strong><code>arr --&gt; Array.prototype --&gt; Object.prototype --&gt; null</code></strong></li>
+<li><strong>func</strong>, func继承Function.prototype(call bind等方法) 原型链为: <strong><code>func --&gt; Function.prototype --&gt; Object.prototype --&gt; null</code></strong></li>
+</ol>
+<h4 id="使用构造器创建对象"><a href="#使用构造器创建对象" class="headerlink" title="使用构造器创建对象"></a>使用构造器创建对象</h4><p>js中构造函数就是普通函数， 使用new操作符作用函数，可以被称为：构造函数。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">function Graph() &#123;</span><br><span class="line">  this.vertices = [];</span><br><span class="line">  this.edges = [];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Graph.prototype = &#123;</span><br><span class="line">  addVertex: function(v)&#123;</span><br><span class="line">    this.vertices.push(v);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">var g = new Graph();</span><br></pre></td></tr></table></figure>
+
+<p>g.[[prototype]]指向就是Graph.prototype</p>
+<h4 id="使用Object-create创建的对象"><a href="#使用Object-create创建的对象" class="headerlink" title="使用Object.create创建的对象"></a>使用<code>Object.create</code>创建的对象</h4><p>ES6的新方法: <code>Object.create()</code>创建一个新的对象。传入参数为新对象的原型。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">var a = &#123; a: 1 &#125;</span><br><span class="line"></span><br><span class="line">// a ---&gt; Object.prototype ---&gt; null</span><br><span class="line"></span><br><span class="line">var b = Object.create(a)</span><br><span class="line"></span><br><span class="line">// b -----&gt; a -----&gt; Object.prototype  ---&gt; null</span><br><span class="line"></span><br><span class="line">var c = Object.create(b)</span><br><span class="line"></span><br><span class="line">// c ---&gt; b ---&gt; a ---&gt; Object.prototype ---&gt; null</span><br><span class="line"></span><br><span class="line">var d = Object.create(null)</span><br><span class="line"></span><br><span class="line">// no properties</span><br></pre></td></tr></table></figure>
+
+<h4 id="使用Class创建的对象"><a href="#使用Class创建的对象" class="headerlink" title="使用Class创建的对象"></a>使用Class创建的对象</h4><h4 id="性能"><a href="#性能" class="headerlink" title="性能"></a>性能</h4><p>在原型链查找属性比较耗时，对性能有副作用。</p>
+<p>遍历对象属性时，原型链<strong>每个</strong>可枚举属性都会被枚举出来。</p>
+<p><code>Object.hasOwnproperty()</code>和<code>Object.keys()</code>是<strong>不会</strong>遍历原型链的方法</p>
+<h2 id="prototype和Object-getPrototypeOf"><a href="#prototype和Object-getPrototypeOf" class="headerlink" title="prototype和Object.getPrototypeOf()"></a>prototype和Object.getPrototypeOf()</h2><p>prototype是针对类(构造函数等)的, Object.getPrototypeOf()是用作实例的。功能一致。</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="http://movelovemovelove.github.io">kaka</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://movelovemovelove.github.io/2023/06/04/%E5%8E%9F%E5%9E%8B%E9%93%BE/">http://movelovemovelove.github.io/2023/06/04/%E5%8E%9F%E5%9E%8B%E9%93%BE/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://movelovemovelove.github.io" target="_blank">码农必须冷静</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/js/">js</a></div><div class="post_share"><div class="social-share" data-image="/img/portial.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/2023/06/04/ts/" title="typescript基础"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">typescript基础</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2023/06/04/%E9%97%AD%E5%8C%85/" title="闭包"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-06-04</div><div class="title">闭包</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/portial.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">kaka</div><div class="author-info__description">vue2\vue3\react\angular\electron..都听过</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">6</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">4</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/MovelOvemoVelovE"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/movelovemovelove" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a><a class="social-icon" href="mailto:MovelOvemoVelovE@163.com" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #4a7dbe;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">菜鸡笔记</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9F%BA%E4%BA%8E%E5%8E%9F%E5%9E%8B%E9%93%BE%E7%9A%84%E7%BB%A7%E6%89%BF"><span class="toc-number">1.1.</span> <span class="toc-text">基于原型链的继承</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BB%A7%E6%89%BF%E5%B1%9E%E6%80%A7"><span class="toc-number">1.1.0.1.</span> <span class="toc-text">继承属性</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BB%A7%E6%89%BF%E6%96%B9%E6%B3%95"><span class="toc-number">1.1.0.2.</span> <span class="toc-text">继承方法</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#js%E4%BD%BF%E7%94%A8%E5%8E%9F%E5%9E%8B"><span class="toc-number">1.2.</span> <span class="toc-text">js使用原型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E4%B8%8D%E5%90%8C%E6%96%B9%E6%B3%95%E5%88%9B%E5%BB%BA%E5%92%8C%E7%94%9F%E6%88%90%E5%8E%9F%E5%9E%8B%E9%93%BE"><span class="toc-number">1.3.</span> <span class="toc-text">使用不同方法创建和生成原型链</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E8%AF%AD%E6%B3%95%E7%BB%93%E6%9E%84%E5%88%9B%E5%BB%BA%E7%9A%84%E5%AF%B9%E8%B1%A1"><span class="toc-number">1.3.0.1.</span> <span class="toc-text">使用语法结构创建的对象</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E6%9E%84%E9%80%A0%E5%99%A8%E5%88%9B%E5%BB%BA%E5%AF%B9%E8%B1%A1"><span class="toc-number">1.3.0.2.</span> <span class="toc-text">使用构造器创建对象</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8Object-create%E5%88%9B%E5%BB%BA%E7%9A%84%E5%AF%B9%E8%B1%A1"><span class="toc-number">1.3.0.3.</span> <span class="toc-text">使用Object.create创建的对象</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8Class%E5%88%9B%E5%BB%BA%E7%9A%84%E5%AF%B9%E8%B1%A1"><span class="toc-number">1.3.0.4.</span> <span class="toc-text">使用Class创建的对象</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%80%A7%E8%83%BD"><span class="toc-number">1.3.0.5.</span> <span class="toc-text">性能</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#prototype%E5%92%8CObject-getPrototypeOf"><span class="toc-number">1.4.</span> <span class="toc-text">prototype和Object.getPrototypeOf()</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/06/04/%E5%8E%9F%E5%9E%8B%E9%93%BE/" title="原型链">原型链</a><time datetime="2023-06-04T03:42:59.000Z" title="发表于 2023-06-04 11:42:59">2023-06-04</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/06/04/ts/" title="typescript基础">typescript基础</a><time datetime="2023-06-04T02:02:53.000Z" title="发表于 2023-06-04 10:02:53">2023-06-04</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/06/04/%E9%97%AD%E5%8C%85/" title="闭包">闭包</a><time datetime="2023-06-04T01:49:52.000Z" title="发表于 2023-06-04 09:49:52">2023-06-04</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/06/03/%E6%B5%8F%E8%A7%88%E5%99%A8%E7%BC%93%E5%AD%98/" title="浏览器缓存">浏览器缓存</a><time datetime="2023-06-03T15:40:45.000Z" title="发表于 2023-06-03 23:40:45">2023-06-03</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/06/03/vue3/" title="vue3">vue3</a><time datetime="2023-06-03T14:54:05.000Z" title="发表于 2023-06-03 22:54:05">2023-06-03</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023 By kaka</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
