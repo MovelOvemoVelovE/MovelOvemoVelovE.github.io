@@ -1,0 +1,353 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>angular-one | 码农必须冷静</title><meta name="author" content="kaka"><meta name="copyright" content="kaka"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="angular?Angular是基于TS的开发平台。 核心知识: 组件、模板、依赖注入。 组件包含import &amp;#123;Component&amp;#125; from &#39;@angular&#x2F;core&#39;  @Component&amp;#123; selector: &#39;#id&#39;, template: &#39;&#39;&amp;#125;装饰器的TS类 模板内的&amp;#123;&amp;#123;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="angular-one">
+<meta property="og:url" content="http://movelovemovelove.github.io/2023/06/14/angular-one/index.html">
+<meta property="og:site_name" content="码农必须冷静">
+<meta property="og:description" content="angular?Angular是基于TS的开发平台。 核心知识: 组件、模板、依赖注入。 组件包含import &amp;#123;Component&amp;#125; from &#39;@angular&#x2F;core&#39;  @Component&amp;#123; selector: &#39;#id&#39;, template: &#39;&#39;&amp;#125;装饰器的TS类 模板内的&amp;#123;&amp;#123;">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://movelovemovelove.github.io/img/portial.jpg">
+<meta property="article:published_time" content="2023-06-14T07:35:21.000Z">
+<meta property="article:modified_time" content="2023-06-14T07:35:58.061Z">
+<meta property="article:author" content="kaka">
+<meta property="article:tag" content="angular">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://movelovemovelove.github.io/img/portial.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://movelovemovelove.github.io/2023/06/14/angular-one/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'angular-one',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-06-14 15:35:58'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = (url,id = false) => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      if (id) link.id = id
+      link.onerror = reject
+      link.onload = link.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        link.onload = link.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><script>const preloader = {
+  endLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = 'hidden';
+    document.getElementById('loading-box').classList.remove("loaded")
+  }
+}
+
+preloader.initLoading()
+window.addEventListener('load',()=> { preloader.endLoading() })
+
+if (false) {
+  document.addEventListener('pjax:send', () => { preloader.initLoading() })
+  document.addEventListener('pjax:complete', () => { preloader.endLoading() })
+}</script><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/portial.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">18</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">11</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">11</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><span id="blog-info"><a href="/" title="码农必须冷静"><span class="site-name">码农必须冷静</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">angular-one</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-06-14T07:35:21.000Z" title="发表于 2023-06-14 15:35:21">2023-06-14</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-06-14T07:35:58.061Z" title="更新于 2023-06-14 15:35:58">2023-06-14</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/angular/">angular</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="angular-one"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div><article class="post-content" id="article-container"><h1 id="angular"><a href="#angular" class="headerlink" title="angular?"></a>angular?</h1><p>Angular是基于<strong>TS</strong>的开发平台。 核心知识: 组件、模板、依赖注入。</p>
+<p>组件包含<code>import &#123;Component&#125; from &#39;@angular/core&#39;  @Component&#123; selector: &#39;#id&#39;, template: &#39;&#39;&#125;</code>装饰器的TS类</p>
+<p>模板内的<code>&#123;&#123;&#125;&#125;</code>、<code>&lt;p [id]=&#39;SayHi&#39;&gt;&lt;/p&gt;</code>、<code>&lt;p (click)=&quot;SayHi()&quot;&gt;&lt;/p&gt;</code>、<code>*ngIf</code>、<code>*ngFor</code></p>
+<p>依赖注入的<code>@Injectable(&#123;&#125;)</code>、<code>constructor(private logger:Logger)</code></p>
+<p>自带一些库： 路由器、表单、Angular HttpClient(基于XMLHttpRequest)、动画、PWA(processive web application)、原理图(搭建脚手架、重构、升级的自动化工具)</p>
+<h1 id="入手"><a href="#入手" class="headerlink" title="入手"></a>入手</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -g @angular/cli</span><br></pre></td></tr></table></figure>
+
+<p>官网示例项目<a target="_blank" rel="noopener" href="https://angular.cn/generated/live-examples/getting-started-v0/stackblitz.html"></a>下载到本地后。</p>
+<h5 id="安装依赖"><a href="#安装依赖" class="headerlink" title="安装依赖:"></a>安装依赖:</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">npm i </span><br><span class="line"></span><br><span class="line"><span class="comment">#安装失败</span></span><br><span class="line"></span><br><span class="line">npm i --legacy-peer-deps --force</span><br></pre></td></tr></table></figure>
+
+<h5 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">ng serve</span><br><span class="line"></span><br><span class="line"><span class="comment"># 选择端口号  默认为4200</span></span><br><span class="line">ng serve --port 4201</span><br></pre></td></tr></table></figure>
+
+<p>打开localhost: 4200来运行项目。</p>
+<h1 id="初尝禁果-最基础认识"><a href="#初尝禁果-最基础认识" class="headerlink" title="初尝禁果(最基础认识)"></a>初尝禁果(最基础认识)</h1><h5 id="循环渲染"><a href="#循环渲染" class="headerlink" title="循环渲染"></a>循环渲染</h5><p>使用<code>*ngFor</code>(结构体指令)来循环数组渲染。通过<code>&#123;&#123;&#125;&#125;</code>模板插值，渲染为文本。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ src/app/product-list/product-list.component.html</span><br><span class="line"></span><br><span class="line">&lt;div *ngFor=<span class="string">&quot;let product of products&quot;</span>&gt;</span><br><span class="line">    &lt;h3&gt;</span><br><span class="line">        &#123;&#123; product.name &#125;&#125;</span><br><span class="line">    &lt;/h3&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+
+<p><code>*ngFor</code>类似于<code>let value of arr</code>的语法。</p>
+<h5 id="动态绑定-attrs"><a href="#动态绑定-attrs" class="headerlink" title="动态绑定(attrs)"></a>动态绑定(attrs)</h5><p>使用<code>[]=&quot;&quot;</code>动态绑定属性</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;h3&gt;</span><br><span class="line">    &lt;a [title]=<span class="string">&quot;product.name + &#x27; details&#x27; &quot;</span>&gt;</span><br><span class="line">        &#123;&#123;product.name&#125;&#125;</span><br><span class="line">    &lt;/a&gt;</span><br><span class="line">&lt;/h3&gt;</span><br></pre></td></tr></table></figure>
+
+<h5 id="条件渲染"><a href="#条件渲染" class="headerlink" title="条件渲染"></a>条件渲染</h5><p>使用<code>*ngIf</code>条件判断渲染等。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">// &lt;/h3&gt;...</span><br><span class="line">&lt;p *ngIf=<span class="string">&quot;product.description&quot;</span>&gt;</span><br><span class="line">    Description: &#123;&#123; product.description &#125;&#125;</span><br><span class="line">&lt;/p&gt;    </span><br></pre></td></tr></table></figure>
+
+<h5 id="事件绑定"><a href="#事件绑定" class="headerlink" title="事件绑定"></a>事件绑定</h5><p>使用<code>(eventName)=&quot;Function()&quot;</code>给元素绑定事件</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">// &lt;/p&gt;...</span><br><span class="line">&lt;button <span class="built_in">type</span>=<span class="string">&quot;button&quot;</span> (click)=<span class="string">&quot;share()&quot;</span>&gt;</span><br><span class="line">    Share</span><br><span class="line">&lt;/button&gt;</span><br></pre></td></tr></table></figure>
+
+<h5 id="生成组件"><a href="#生成组件" class="headerlink" title="生成组件"></a>生成组件</h5><p>使用一下注册一个子组件。 生成器生成三个文件为: </p>
+<ul>
+<li><p>product-alerts.component.ts</p>
+</li>
+<li><p>product-alerts.component.html</p>
+</li>
+<li><p>product-alerts.component.css</p>
+</li>
+<li><p>product-alerts.component.spec.ts</p>
+</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ng generate component product-alerts</span><br></pre></td></tr></table></figure>
+
+<p>在<code>.ts</code>文件中，引入<code>Component</code>。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">@Component(&#123;</span><br><span class="line">  selector: <span class="string">&#x27;app-product-alerts&#x27;</span>,</span><br><span class="line">  templateUrl: <span class="string">&#x27;./product-alerts.component.html&#x27;</span>,</span><br><span class="line">  styleUrls: [<span class="string">&#x27;./product-alerts.component.css&#x27;</span>]</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p><code>@Component()</code>装饰器会</p>
+<ol>
+<li>指出它后面类为组件，包含了选择器、模板、样式</li>
+<li>导出了类<code>ProductAlertsComponent</code>，处理组件功能。</li>
+</ol>
+<h5 id="父组件-x3D-gt-子组件"><a href="#父组件-x3D-gt-子组件" class="headerlink" title="父组件 &#x3D;&gt; 子组件"></a>父组件 &#x3D;&gt; 子组件</h5><p>子组件通过引入<code>Input</code>, 使用<code>@Input()</code>装饰器定义数据属性， 这个装饰器指出 <strong>此属性值是从父组件传递而来</strong>。 然后子组件就可以使用数据。</p>
+<p>而父组件需要通过<code>[]=&quot;&quot;</code>传入动态属性数据。</p>
+<p><code>AppModule.ts</code>会在<code>declarations:[]</code><strong>声明组件</strong>，来确保可以在应用内使用子组件。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">import &#123; Component, Input &#125; from <span class="string">&#x27;@angular/core&#x27;</span>; // 引入组件及数据Input</span><br><span class="line">import &#123; Product &#125; from <span class="string">&#x27;../products&#x27;</span>;  // 数据源</span><br><span class="line"></span><br><span class="line">@Component(&#123;</span><br><span class="line">  selector: <span class="string">&#x27;app-product-alerts&#x27;</span>,</span><br><span class="line">  templateUrl: <span class="string">&#x27;./product-alerts.component.html&#x27;</span>,</span><br><span class="line">  styleUrls: [<span class="string">&#x27;./product-alerts.component.css&#x27;</span>]</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="built_in">export</span> class ProduceAlertsComponent &#123;</span><br><span class="line">  @Input() product!: Product </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>父组件代码: </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">$ product-list.component.html</span><br><span class="line">&lt;app-produce-alerts</span><br><span class="line">    [product]=<span class="string">&quot;product&quot;</span></span><br><span class="line">&gt;&lt;/app-produce-alerts&gt;</span><br><span class="line"></span><br><span class="line">$ product-list.component.ts</span><br><span class="line"></span><br><span class="line"><span class="built_in">export</span> class ProductListComponent &#123;</span><br><span class="line">  products = products;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>appModule代码:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">@NgModule(&#123;</span><br><span class="line">  declarations: [</span><br><span class="line">    AppComponent,</span><br><span class="line">    ProduceAlertsComponent</span><br><span class="line">  ]</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h5 id="子组件-x3D-gt-父组件"><a href="#子组件-x3D-gt-父组件" class="headerlink" title="子组件 &#x3D;&gt; 父组件"></a>子组件 &#x3D;&gt; 父组件</h5><p>子组件向父组件通信。</p>
+<ul>
+<li><p>在子组件的<code>@angular/core</code>内引入<code>Output</code>、<code>EventEmitter</code>符号，并使用<code>@Output</code>定义子组件一个<code>notify = new EventEmitter()</code>事件。</p>
+</li>
+<li><p>父组件ts内，设置一个<code>onNotify</code>自己的事件, 并定义操作。 </p>
+</li>
+<li><p>父组件html内，给子组件定义绑定自定义事件, 事件名与子组件定义的eventEmitter实例化对象一致，事件函数是父组件定义函数。<code>(notify)=&quot;onNotify()&quot;</code></p>
+</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 子组件ts</span></span><br><span class="line"><span class="built_in">export</span> class ProduceAlertsComponent &#123;</span><br><span class="line">  @Input() product!: Product</span><br><span class="line">  @Output() notify = new EventEmitter()</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 父组件ts</span></span><br><span class="line"><span class="built_in">export</span> class ProductListComponent &#123;</span><br><span class="line">  products = products;</span><br><span class="line"></span><br><span class="line">  onNotify(e:Event)&#123;</span><br><span class="line">    window.alert(<span class="string">&#x27;You will be notified when &#x27;</span>+ e + <span class="string">&#x27;goes on sale&#x27;</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 父组件html</span></span><br><span class="line">&lt;app-produce-alerts</span><br><span class="line">    [product]=<span class="string">&quot;product&quot;</span></span><br><span class="line">    (notify)=<span class="string">&quot;onNotify(<span class="variable">$event</span>)&quot;</span></span><br><span class="line">&gt;&lt;/app-produce-alerts&gt;</span><br></pre></td></tr></table></figure>
+
+<h1 id="梅开二度-跳转导航"><a href="#梅开二度-跳转导航" class="headerlink" title="梅开二度(跳转导航)"></a>梅开二度(跳转导航)</h1><p>本文(官网docs)已经使用angular router导航到<strong>ProductListComponent</strong>。 本章需要创建一个<strong>ProductDetails</strong>组件，点击商品名来跳转到<strong>商品详情</strong>。</p>
+<p>并且根据不同数据处理渲染不同<strong>商品详情页</strong></p>
+<h5 id="关联url到组件-路由配置"><a href="#关联url到组件-路由配置" class="headerlink" title="关联url到组件(路由配置)"></a>关联url到组件(路由配置)</h5><p>第一次创建组件，仍然使用</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ng generate component product-details</span><br></pre></td></tr></table></figure>
+
+<p>app.module.ts:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">@NgModule(&#123;</span><br><span class="line">  imports: [</span><br><span class="line">    BrowserModule,</span><br><span class="line">    ReactiveFormsModule,</span><br><span class="line">    RouterModule.forRoot([</span><br><span class="line">      &#123; path: <span class="string">&#x27;&#x27;</span>, component: ProductListComponent &#125;,</span><br><span class="line">      &#123; path: <span class="string">&#x27;products/:productId&#x27;</span>, component: ProductDetailsComponent &#125; <span class="comment"># 添加路由配置项 跳转路径导航栏变为 xxx:4200/products/1</span></span><br><span class="line">    ])</span><br><span class="line">  ],</span><br><span class="line">  declarations: [</span><br><span class="line">    AppComponent,</span><br><span class="line">    TopBarComponent,</span><br><span class="line">    ProductListComponent,</span><br><span class="line">    ProduceAlertsComponent,</span><br><span class="line">    ProductDetailsComponent  <span class="comment"># 新建组件 自动声明</span></span><br><span class="line">  ],</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>product-list.component.html:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;div *ngFor=<span class="string">&quot;let product of products&quot;</span>&gt;</span><br><span class="line"></span><br><span class="line">  &lt;h3&gt;</span><br><span class="line">    &lt;a</span><br><span class="line">      [title]=<span class="string">&quot;product.name + &#x27; details&#x27;&quot;</span></span><br><span class="line">      [routerLink]=<span class="string">&quot;[&#x27;/products&#x27;, product.id]&quot;</span>&gt;</span><br><span class="line">      &#123;&#123; product.name &#125;&#125;</span><br><span class="line">    &lt;/a&gt;</span><br><span class="line">  &lt;/h3&gt;</span><br><span class="line"></span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+
+<p>在这里是使用了数组，第一段为固定字符串<code>products</code>，第二段则为动态id，也就是<code>*ngFor</code>下的<code>product</code>的id字段。</p>
+<h5 id="路由参数匹配渲染详情页"><a href="#路由参数匹配渲染详情页" class="headerlink" title="路由参数匹配渲染详情页"></a>路由参数匹配渲染详情页</h5><p>根据不同的<strong>路由参数</strong>来渲染。 使用到了router配合数据条件渲染。</p>
+<p>主要在<code>productDetails</code>组件内进行如下操作: </p>
+<ul>
+<li>在<code>@angular/core</code>内引入<code>OnInit</code>接口，组件类来实现了<code>OnInit</code>的接口(详见常用类、接口属性表)</li>
+<li><code>@angular/router</code>引入<code>ActivatedRoute</code>类，添加构造函数参数内，注入<code>ActivatedRoute</code>(详见常用类、接口属性表)</li>
+<li>在<code>ngOnInit():void</code>内使用<code>snapshot.paramMap.get(&#39;productId&#39;)</code>来进行筛选渲染列表</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">import &#123; Component, OnInit &#125; from <span class="string">&#x27;@angular/core&#x27;</span>; // 引入组件、生命周期类</span><br><span class="line">import &#123; ActivatedRoute &#125; from <span class="string">&#x27;@angular/router&#x27;</span>;  // 注入路由信息类</span><br><span class="line"></span><br><span class="line">// 数据源及interface</span><br><span class="line">import &#123; Product, products &#125; from <span class="string">&#x27;../products&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="built_in">export</span> class ProductDetailsComponent implements OnInit &#123;</span><br><span class="line">  product: Product | undefined</span><br><span class="line">  constructor(private route:ActivatedRoute)&#123;</span><br><span class="line"></span><br><span class="line">  &#125;</span><br><span class="line">  ngOnInit(): void &#123;</span><br><span class="line">    console.log(this.route);</span><br><span class="line">    const params = this.route.snapshot.paramMap</span><br><span class="line">    const productIdFromRoute = Number(params.get(<span class="string">&#x27;productId&#x27;</span>))</span><br><span class="line">    this.product = products.find( v =&gt; v.id === productIdFromRoute)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// product-details.component.html</span><br><span class="line">&lt;p&gt;Product Details&lt;/p&gt;</span><br><span class="line">&lt;div *ngIf=<span class="string">&quot;product&quot;</span>&gt;</span><br><span class="line">    &lt;h3&gt;&#123;&#123;product.name&#125;&#125;&lt;/h3&gt;</span><br><span class="line">    &lt;h4&gt;&#123;&#123;product.price&#125;&#125;&lt;/h4&gt;</span><br><span class="line">    &lt;p&gt;&#123;&#123;product.description&#125;&#125;&lt;/p&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+
+<h1 id="三羊开泰-服务和管道"><a href="#三羊开泰-服务和管道" class="headerlink" title="三羊开泰(服务和管道)"></a>三羊开泰(服务和管道)</h1><p>本章(官网docs)创建购物车<strong>视图</strong>、购物车<strong>服务</strong>、使用<strong>HttpClient请求接口</strong>检索配送价格、<strong>async管道使用service渲染数据</strong></p>
+<p>类同于Vue的vuex等的数据管理，创建服务也就是创建一个模块化数据，包含了CRUD等。</p>
+<h5 id="创建购物车服务"><a href="#创建购物车服务" class="headerlink" title="创建购物车服务"></a>创建购物车服务</h5><p>Angular中，服务是类的一个实例，借助<strong>依赖注入系统</strong>，在组件任意部分使用。</p>
+<ul>
+<li>生成cart 的服务， 生成<code>cart.service.ts</code>文件</li>
+<li>接口导出<code>Product</code>数据类型，并在<code>cart.service.ts</code>配置初始化</li>
+<li>定义配置 <strong>增、清楚、查</strong>购物车商品的 方法</li>
+<li>商品详情页:<code>product-details.component</code>增加按钮，点击加入购物车(也就是增的操作)</li>
+</ul>
+<hr>
+<p>生成服务:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ng generate service cart</span><br></pre></td></tr></table></figure>
+
+<hr>
+<p>初始化数据及定义方法:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">import &#123; Product &#125; from <span class="string">&#x27;./products&#x27;</span>; </span><br><span class="line"></span><br><span class="line"><span class="built_in">export</span> class CartService &#123;</span><br><span class="line">  items: Product[] = []</span><br><span class="line">  addToCart(product: Product)&#123;</span><br><span class="line">    this.items.push(product)</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="function"><span class="title">getItems</span></span>()&#123;</span><br><span class="line">    <span class="built_in">return</span> this.items</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="function"><span class="title">clearCart</span></span>()&#123;</span><br><span class="line">    this.items = []</span><br><span class="line">    <span class="built_in">return</span> this.items</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="function"><span class="title">getShippingPrices</span></span>()&#123;</span><br><span class="line">    <span class="built_in">return</span> this.http.get&lt;&#123;<span class="built_in">type</span>:string, price:number&#125;[]&gt;(<span class="string">&#x27;../assets/shipping.json&#x27;</span>)</span><br><span class="line">  &#125;</span><br><span class="line">  constructor( </span><br><span class="line">    private http:HttpClient</span><br><span class="line">   ) &#123; &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<p>使用服务:</p>
+<p>需求为详情页面 点击按钮来加入到购物车。 首先在<code>product-details.component.html</code>加入一个<code>Collect to Cart</code>的button。 </p>
+<p>主要关注为ts代码。 <code>product-details.component.ts</code>:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">import &#123; CartService &#125; from <span class="string">&#x27;../cart.service&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="built_in">export</span> class ProductDetailsComponent implements OnInit &#123;</span><br><span class="line">  product: Product | undefined</span><br><span class="line">  constructor(</span><br><span class="line">    private route:ActivatedRoute,</span><br><span class="line">    private cartService: CartService</span><br><span class="line">  )&#123;</span><br><span class="line"></span><br><span class="line">  &#125;</span><br><span class="line">  addToCart(product: Product)&#123;</span><br><span class="line">    this.cartService.addToCart(product)</span><br><span class="line">    window.alert(<span class="string">&#x27;Your product has been added to Cart&#x27;</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>后把<code>addToCart</code>绑定给html的button点击事件，那么一个购物车服务就完成了。</p>
+<h5 id="创建购物车视图"><a href="#创建购物车视图" class="headerlink" title="创建购物车视图"></a>创建购物车视图</h5><ul>
+<li>生成购物车组件</li>
+<li>(自动声明了购物车组件)配置购物车路由</li>
+<li><code>topBar</code>组件(示例中有)的图标跳转配置<code>[routerLink]</code></li>
+<li>使用<code>cartService</code>获取数据</li>
+</ul>
+<hr>
+<p>前三步雷同，第四步：引入服务、定义数据、循环渲染模板</p>
+<p>如下: <code>cart.component.ts</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">/* 业务引入 */</span><br><span class="line">import &#123; CartService &#125; from <span class="string">&#x27;../cart.service&#x27;</span>;</span><br><span class="line"></span><br><span class="line">@Component(&#123;</span><br><span class="line">  selector: <span class="string">&#x27;app-cart&#x27;</span>,</span><br><span class="line">  templateUrl: <span class="string">&#x27;./cart.component.html&#x27;</span>,</span><br><span class="line">  styleUrls: [<span class="string">&#x27;./cart.component.css&#x27;</span>]</span><br><span class="line">&#125;)</span><br><span class="line"><span class="built_in">export</span> class CartComponent &#123;</span><br><span class="line">  items = this.cartService.getItems()</span><br><span class="line">  constructor(</span><br><span class="line">    private cartService:CartService</span><br><span class="line">  )&#123;&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="请求接口"><a href="#请求接口" class="headerlink" title="请求接口"></a>请求接口</h5><p>基于<code>XMLHttpRequest</code>封装的HttpClient来进行请求.从<code>@angular/common/http</code></p>
+<ul>
+<li>注册配置<code>HttpClientModule</code>到<code>@NgModule()</code>的<code>imports</code>内以便使用。</li>
+<li>service服务内注入<code>HttpClient</code>到构造函数</li>
+<li>调用<code>Httpclient.get()</code>方法，获取数据</li>
+</ul>
+<hr>
+<p><code>app.module.ts</code>代码如下</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">import &#123; HttpClientModule &#125; from <span class="string">&#x27;@angular/common/http&#x27;</span>;</span><br><span class="line"></span><br><span class="line">@NgModule(&#123;</span><br><span class="line">  imports: [</span><br><span class="line">    BrowserModule,</span><br><span class="line">    ReactiveFormsModule,</span><br><span class="line">    HttpClientModule,</span><br><span class="line">    RouterModule.forRoot([</span><br><span class="line">      &#123; path: <span class="string">&#x27;&#x27;</span>, component: ProductListComponent &#125;,</span><br><span class="line">      &#123; path: <span class="string">&#x27;products/:productId&#x27;</span>, component: ProductDetailsComponent &#125;,</span><br><span class="line">      &#123; path: <span class="string">&#x27;cart&#x27;</span>, component: CartComponent &#125;,</span><br><span class="line">    ]),</span><br><span class="line">  ]</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<hr>
+<p><code>cart.service.ts</code>如下:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">import &#123; HttpClient &#125; from <span class="string">&#x27;@angular/common/http&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">export</span> class CartService &#123;</span><br><span class="line">  items: Product[] = []</span><br><span class="line">  // 请求接口得到数据源</span><br><span class="line">  <span class="function"><span class="title">getShippingPrices</span></span>()&#123;</span><br><span class="line">    <span class="built_in">return</span> this.http.get&lt;&#123;<span class="built_in">type</span>:string, price:number&#125;[]&gt;(<span class="string">&#x27;../assets/shipping.json&#x27;</span>)</span><br><span class="line">  &#125;</span><br><span class="line">  constructor( </span><br><span class="line">  // 注入定义http</span><br><span class="line">    private http:HttpClient</span><br><span class="line">   ) &#123; &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="使用接口数据"><a href="#使用接口数据" class="headerlink" title="使用接口数据"></a>使用接口数据</h5><ul>
+<li>生成shipping组件、配置路由、自动声明组件</li>
+<li>导入服务、定义(Observable)数据、初始化完成请求初始化数据</li>
+<li>模板渲染、async管道(配合Observable)</li>
+</ul>
+<hr>
+<p><code>shipping.component.ts</code>:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">export</span> class ShippingComponent implements OnInit &#123;</span><br><span class="line"></span><br><span class="line">  shippingCosts!: Observable&lt;&#123; <span class="built_in">type</span>: string, price: number &#125;[]&gt;;  // 配合async管道</span><br><span class="line"></span><br><span class="line">  ngOnInit(): void &#123;</span><br><span class="line">    this.shippingCosts =  this.cartService.getShippingPrices();  // 初始化 请求数据初始化接口</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<p><code>shipping.component.html</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;p&gt;shipping works!&lt;/p&gt;</span><br><span class="line"></span><br><span class="line">&lt;div class=<span class="string">&quot;ship-item&quot;</span> *ngFor=<span class="string">&quot;let shipping of shippingCosts | async&quot;</span>&gt;</span><br><span class="line">    &lt;span&gt;&#123;&#123;shipping.type&#125;&#125;&lt;/span&gt;</span><br><span class="line">    &lt;span&gt;&#123;&#123;shipping.price | currency&#125;&#125;&lt;/span&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+
+<h1 id="四季平安-表单输入"><a href="#四季平安-表单输入" class="headerlink" title="四季平安(表单输入)"></a>四季平安(表单输入)</h1><p>添加name、address两个input框，输入信息，submit form并清空数据和字段。  </p>
+<ul>
+<li>核心为在<code>@angular/form</code>内引入<code>FormBuilder</code>。 生成表单的快捷方法</li>
+<li>把服务注入构造函数内</li>
+<li><code>FormBuilder.group(&#123;&#125;)</code> 生成表单模型</li>
+<li>定义submit方法。 清空购物车数据、清空购物车表单数据</li>
+<li>模板<code>&lt;form /&gt;</code> 绑定 <code>[FormGroup]=&quot;&quot;</code>,绑定submit事件<code>(ngSubmit)=&quot;onSubmit()&quot;</code></li>
+<li>模板表单空间绑定<code>formControlName=&quot;name/address&quot;</code></li>
+<li>模板submit按钮submit</li>
+</ul>
+<hr>
+<p><code>cart.component.ts</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">import &#123; Component &#125; from <span class="string">&#x27;@angular/core&#x27;</span>;</span><br><span class="line">import &#123; FormBuilder &#125; from <span class="string">&#x27;@angular/forms&#x27;</span>;</span><br><span class="line">/* 业务引入 */</span><br><span class="line">import &#123; CartService &#125; from <span class="string">&#x27;../cart.service&#x27;</span>;</span><br><span class="line"></span><br><span class="line">@Component(&#123;</span><br><span class="line">  selector: <span class="string">&#x27;app-cart&#x27;</span>,</span><br><span class="line">  templateUrl: <span class="string">&#x27;./cart.component.html&#x27;</span>,</span><br><span class="line">  styleUrls: [<span class="string">&#x27;./cart.component.css&#x27;</span>]</span><br><span class="line">&#125;)</span><br><span class="line"><span class="built_in">export</span> class CartComponent &#123;</span><br><span class="line">  items = this.cartService.getItems()</span><br><span class="line"></span><br><span class="line">  checkForm = this.formBuilder.group(&#123;</span><br><span class="line">    name: <span class="string">&#x27;&#x27;</span>,</span><br><span class="line">    address: <span class="string">&#x27;&#x27;</span></span><br><span class="line">  &#125;)</span><br><span class="line"></span><br><span class="line">  onSubmit():void&#123;</span><br><span class="line">    this.items = this.cartService.clearCart()</span><br><span class="line">    console.log(<span class="string">&#x27;Your order has been submitted&#x27;</span>, this.checkForm.value);</span><br><span class="line">    this.checkForm.reset()</span><br><span class="line">  &#125;</span><br><span class="line">  constructor(</span><br><span class="line">    private cartService:CartService,</span><br><span class="line">    private formBuilder: FormBuilder</span><br><span class="line">  )&#123;&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<p><code>cart.component.html</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;form [formGroup]=<span class="string">&quot;checkForm&quot;</span> (ngSubmit)=<span class="string">&quot;onSubmit()&quot;</span>&gt;</span><br><span class="line">    &lt;div&gt;</span><br><span class="line">        &lt;label <span class="keyword">for</span>=<span class="string">&quot;name&quot;</span>&gt;Name:&lt;/label&gt;</span><br><span class="line">        &lt;input <span class="built_in">type</span>=<span class="string">&quot;text&quot;</span> formControlName=<span class="string">&quot;name&quot;</span>&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">    &lt;div&gt;</span><br><span class="line">        &lt;label <span class="keyword">for</span>=<span class="string">&quot;address&quot;</span>&gt;Address:&lt;/label&gt;</span><br><span class="line">        &lt;input <span class="built_in">type</span>=<span class="string">&quot;text&quot;</span> formControlName=<span class="string">&quot;address&quot;</span>&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">    &lt;button class=<span class="string">&quot;button&quot;</span> <span class="built_in">type</span>=<span class="string">&quot;submixt&quot;</span>&gt;Purchase&lt;/button&gt;</span><br><span class="line">&lt;/form&gt;</span><br></pre></td></tr></table></figure>
+
+<p>这就是<code>Angular</code>的初步尝试。 总结demo，一步步了解、深入angular。</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="http://movelovemovelove.github.io">kaka</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://movelovemovelove.github.io/2023/06/14/angular-one/">http://movelovemovelove.github.io/2023/06/14/angular-one/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://movelovemovelove.github.io" target="_blank">码农必须冷静</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/angular/">angular</a></div><div class="post_share"><div class="social-share" data-image="/img/portial.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/2023/06/08/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E7%BA%BF%E6%80%A7%E8%A1%A8/" title="数据结构-线性表"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">数据结构-线性表</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/portial.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">kaka</div><div class="author-info__description">vue2\vue3\react\angular\electron..都听过</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">18</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">11</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">11</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/MovelOvemoVelovE"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/movelovemovelove" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a><a class="social-icon" href="mailto:MovelOvemoVelovE@163.com" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #4a7dbe;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">菜鸡笔记</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#angular"><span class="toc-number">1.</span> <span class="toc-text">angular?</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%85%A5%E6%89%8B"><span class="toc-number">2.</span> <span class="toc-text">入手</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%AE%89%E8%A3%85%E4%BE%9D%E8%B5%96"><span class="toc-number">2.0.0.0.1.</span> <span class="toc-text">安装依赖:</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E8%BF%90%E8%A1%8C"><span class="toc-number">2.0.0.0.2.</span> <span class="toc-text">运行</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%88%9D%E5%B0%9D%E7%A6%81%E6%9E%9C-%E6%9C%80%E5%9F%BA%E7%A1%80%E8%AE%A4%E8%AF%86"><span class="toc-number">3.</span> <span class="toc-text">初尝禁果(最基础认识)</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%BE%AA%E7%8E%AF%E6%B8%B2%E6%9F%93"><span class="toc-number">3.0.0.0.1.</span> <span class="toc-text">循环渲染</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%8A%A8%E6%80%81%E7%BB%91%E5%AE%9A-attrs"><span class="toc-number">3.0.0.0.2.</span> <span class="toc-text">动态绑定(attrs)</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%9D%A1%E4%BB%B6%E6%B8%B2%E6%9F%93"><span class="toc-number">3.0.0.0.3.</span> <span class="toc-text">条件渲染</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E4%BA%8B%E4%BB%B6%E7%BB%91%E5%AE%9A"><span class="toc-number">3.0.0.0.4.</span> <span class="toc-text">事件绑定</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E7%94%9F%E6%88%90%E7%BB%84%E4%BB%B6"><span class="toc-number">3.0.0.0.5.</span> <span class="toc-text">生成组件</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E7%88%B6%E7%BB%84%E4%BB%B6-x3D-gt-%E5%AD%90%E7%BB%84%E4%BB%B6"><span class="toc-number">3.0.0.0.6.</span> <span class="toc-text">父组件 &#x3D;&gt; 子组件</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%AD%90%E7%BB%84%E4%BB%B6-x3D-gt-%E7%88%B6%E7%BB%84%E4%BB%B6"><span class="toc-number">3.0.0.0.7.</span> <span class="toc-text">子组件 &#x3D;&gt; 父组件</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%A2%85%E5%BC%80%E4%BA%8C%E5%BA%A6-%E8%B7%B3%E8%BD%AC%E5%AF%BC%E8%88%AA"><span class="toc-number">4.</span> <span class="toc-text">梅开二度(跳转导航)</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%85%B3%E8%81%94url%E5%88%B0%E7%BB%84%E4%BB%B6-%E8%B7%AF%E7%94%B1%E9%85%8D%E7%BD%AE"><span class="toc-number">4.0.0.0.1.</span> <span class="toc-text">关联url到组件(路由配置)</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E8%B7%AF%E7%94%B1%E5%8F%82%E6%95%B0%E5%8C%B9%E9%85%8D%E6%B8%B2%E6%9F%93%E8%AF%A6%E6%83%85%E9%A1%B5"><span class="toc-number">4.0.0.0.2.</span> <span class="toc-text">路由参数匹配渲染详情页</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%89%E7%BE%8A%E5%BC%80%E6%B3%B0-%E6%9C%8D%E5%8A%A1%E5%92%8C%E7%AE%A1%E9%81%93"><span class="toc-number">5.</span> <span class="toc-text">三羊开泰(服务和管道)</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E8%B4%AD%E7%89%A9%E8%BD%A6%E6%9C%8D%E5%8A%A1"><span class="toc-number">5.0.0.0.1.</span> <span class="toc-text">创建购物车服务</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E8%B4%AD%E7%89%A9%E8%BD%A6%E8%A7%86%E5%9B%BE"><span class="toc-number">5.0.0.0.2.</span> <span class="toc-text">创建购物车视图</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E8%AF%B7%E6%B1%82%E6%8E%A5%E5%8F%A3"><span class="toc-number">5.0.0.0.3.</span> <span class="toc-text">请求接口</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E6%8E%A5%E5%8F%A3%E6%95%B0%E6%8D%AE"><span class="toc-number">5.0.0.0.4.</span> <span class="toc-text">使用接口数据</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%9B%9B%E5%AD%A3%E5%B9%B3%E5%AE%89-%E8%A1%A8%E5%8D%95%E8%BE%93%E5%85%A5"><span class="toc-number">6.</span> <span class="toc-text">四季平安(表单输入)</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/06/14/angular-one/" title="angular-one">angular-one</a><time datetime="2023-06-14T07:35:21.000Z" title="发表于 2023-06-14 15:35:21">2023-06-14</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/06/08/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E7%BA%BF%E6%80%A7%E8%A1%A8/" title="数据结构-线性表">数据结构-线性表</a><time datetime="2023-06-08T07:29:16.000Z" title="发表于 2023-06-08 15:29:16">2023-06-08</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/06/08/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E7%AE%97%E6%B3%95%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/" title="数据结构-算法基本概念">数据结构-算法基本概念</a><time datetime="2023-06-08T05:41:57.000Z" title="发表于 2023-06-08 13:41:57">2023-06-08</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/06/08/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E7%BB%AA%E8%AE%BA/" title="数据结构-绪论">数据结构-绪论</a><time datetime="2023-06-08T05:41:04.000Z" title="发表于 2023-06-08 13:41:04">2023-06-08</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/06/07/c-one/" title="C语言基础【1】">C语言基础【1】</a><time datetime="2023-06-07T07:53:36.000Z" title="发表于 2023-06-07 15:53:36">2023-06-07</time></div></div></div></div></div></div></main><footer id="footer" style="background: linear-gradient(135deg,#92FFC0 10%,#002661 100%);"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023 By kaka</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><div class="js-pjax"></div><script defer="defer" id="ribbon" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-ribbon.min.js" size="150" alpha="0.6" zIndex="-1" mobile="false" data-click="true"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
